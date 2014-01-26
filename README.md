@@ -1,7 +1,7 @@
 Vagrant Chef Oracle Project
 ---------------------------
 
-Vagrant Project to create (2) 64-bit Ubuntu Server-based Oracle/Java Development VMs with all applications other than an IDE, to build and test Java EE projects.
+Vagrantfile to create (2) 64-bit Ubuntu Server-based Oracle/Java Development VMs with all applications other than an IDE, to build and test Java EE projects.
 
 <h4>Major Components</h4>
 * Oracle JDK 1.7.0_45-b18 64-bit for Linux x86-64 (apps vm)
