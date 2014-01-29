@@ -12,21 +12,19 @@ nodes = [
     :node             =>  'ApplicationServer',
     :environment      =>  'Development',
     :ip               =>  '192.168.33.10',
-    :host             =>  'app.server',
+    :host             =>  'apps.server-201',
     :ssh_port         =>  2201,
     :wls_port         =>  7709,
-    :memory           =>  2048,
-    :shares           =>  true },
+    :memory           =>  2048},
   { :name             =>  :dbs,
     :node             =>  'DatabaseServer',
     :environment      =>  'Development',
     :ip               =>  '192.168.33.21',
-    :host             =>  'db.server',
+    :host             =>  'dbs.server-301',
     :ssh_port         =>  2202,
     :xe_db_port       =>  1529,
     :xe_listen_port   =>  8380,
-    :memory           =>  2048,
-    :shares           =>  true }
+    :memory           =>  2048}
   ]
   
 default_ssh_port = 22
@@ -62,13 +60,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
 
       config.vm.hostname = opts[:node]
-
-      config.vm.network :private_network, ip: opts[:ip]
-      # config.vm.network :public_network, ip: opts[:ip]
-
-      ## use nfs rather than VirtualBox shared files.  It's heaps faster. (not in use yet...)
-      # config.vm.share_folder  "stuff", "/usr/local/tmp", "${HOME}/GitHub/chef-artifacts", :nfs => true if opts[:shares]
-
+      #config.vm.network :private_network, ip: opts[:ip]
+      config.vm.network :public_network, ip: opts[:ip]
       config.vm.synced_folder "#{ENV['HOME']}/Documents/GitHub/chef-artifacts", "/artifacts"
 
       config.vm.provider :virtualbox do |vb|
@@ -79,11 +72,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.provision :chef_client do |chef|
         chef.environment = opts[:environment]
         chef.provisioning_path = "/etc/chef"
-        chef.chef_server_url = "https://api.opscode.com/organizations/paychexenvironmentsteam"
-        chef.validation_key_path = "~/.chef/paychexenvironmentsteam-validator.pem"
+        chef.chef_server_url = "https://api.opscode.com/organizations/programmatic-ponderings"
+        chef.validation_key_path = "~/.chef/dev-ops.pem"
         chef.node_name = opts[:node]
-        chef.validation_client_name = "paychexenvironmentsteam-validator"
-        chef.client_key_path = "/etc/chef/paychexenvironmentsteam-validator.pem"
+        chef.validation_client_name = "dev-ops"
+        chef.client_key_path = "/etc/chef/dev-ops.pem"
       end
     end
   end
