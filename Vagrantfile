@@ -11,24 +11,25 @@ nodes = [
   { :name             =>  :apps,
     :node             =>  'ApplicationServer',
     :environment      =>  'Development',
-    :ip               =>  '192.168.33.10',
+    :ip               =>  '192.168.33.21',
     :host             =>  'apps.server-201',
-    :ssh_port         =>  2201,
+    :ssh_port_host    =>  2201,
     :wls_port         =>  7709,
     :memory           =>  2048},
   { :name             =>  :dbs,
     :node             =>  'DatabaseServer',
     :environment      =>  'Development',
-    :ip               =>  '192.168.33.21',
+    :ip               =>  '192.168.33.31',
     :host             =>  'dbs.server-301',
-    :ssh_port         =>  2202,
+    :ssh_port_host    =>  2202,
     :xe_db_port       =>  1529,
     :xe_listen_port   =>  8380,
     :memory           =>  2048}
   ]
   
-default_ssh_port = 22
+default_ssh_port_guest  = 22
 VAGRANTFILE_API_VERSION = "2"
+
 Vagrant.require_plugin "vagrant-omnibus"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -40,29 +41,40 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   nodes.each do |opts|
     config.vm.define opts[:name] do |config|
       # ssh port
-      #if opts[:ssh_port] then
-      #  config.vm.network :forwarded_port, guest: default_ssh_port, host: opts[:ssh_port]
-      #end
-
-      # Oracle WebLogic AdminServer port
-      if opts[:wls_port] then
-        config.vm.network :forwarded_port, guest: opts[:wls_port], host: opts[:wls_port]
+      if opts[:ssh_port_host] then
+        config.vm.network :forwarded_port, 
+          guest: default_ssh_port_guest, 
+          host: opts[:ssh_port_host], 
+          id: "ssh"
       end
 
-      # Oracle Database XE Oracle Application Express
+      # Oracle WebLogic listen port
+      if opts[:wls_port] then
+        config.vm.network :forwarded_port, 
+          guest: opts[:wls_port], 
+          host: opts[:wls_port], 
+          id: "wls-listen"
+      end
+
+      # Oracle Database XE http port
       if opts[:xe_db_port] then
-        config.vm.network :forwarded_port, guest: opts[:xe_db_port], host: opts[:xe_db_port]
+        config.vm.network :forwarded_port, 
+          guest: opts[:xe_db_port], 
+          host: opts[:xe_db_port], 
+          id: "xe-http"
       end
 
       # Oracle Database XE database listener port
       if opts[:xe_listen_port] then
-        config.vm.network :forwarded_port, guest: opts[:xe_listen_port], host: opts[:xe_listen_port]
+        config.vm.network :forwarded_port, 
+          guest: opts[:xe_listen_port], 
+          host: opts[:xe_listen_port], 
+          id: "xe-listener"
       end
 
       config.vm.hostname = opts[:node]
-      #config.vm.network :private_network, ip: opts[:ip]
       config.vm.network :public_network, ip: opts[:ip]
-      config.vm.synced_folder "#{ENV['HOME']}/Documents/GitHub/chef-artifacts", "/artifacts"
+      config.vm.synced_folder "#{ENV['HOME']}/Documents/GitHub/chef-artifacts", "/vagrant"
 
       config.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--memory", opts[:memory]]
