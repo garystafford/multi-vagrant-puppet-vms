@@ -9,7 +9,7 @@
 # node definitions
 nodes = [
   { :name             =>  :apps,
-    :node             =>  'ApplicationServer',
+    :node             =>  'ApplicationServer-201',
     :environment      =>  'Development',
     :ip               =>  '192.168.33.21',
     :host             =>  'apps.server-201',
@@ -17,7 +17,7 @@ nodes = [
     :wls_port         =>  7709,
     :memory           =>  2048},
   { :name             =>  :dbs,
-    :node             =>  'DatabaseServer',
+    :node             =>  'DatabaseServer-301',
     :environment      =>  'Development',
     :ip               =>  '192.168.33.31',
     :host             =>  'dbs.server-301',
