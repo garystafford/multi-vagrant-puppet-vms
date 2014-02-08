@@ -1,0 +1,41 @@
+{
+    "nodes": {
+        "apps": {
+            ":node":           "ApplicationServer-201",
+            ":ip":             "192.168.33.21",
+            ":host":           "apps.server-201",
+            ":ssh_host":       {
+                                    ":host_port": 22,
+                                    ":guest_port": 2201,
+                                    ":id": "ssh"
+                                },
+            ":wls_admin":       {
+                                    ":host_port": 7709,
+                                    ":guest_port": 7709,
+                                    ":id": "wls-listen"
+                                },
+            ":memory":          2048
+        },
+        "dbs": {
+            ":node":            "DatabaseServer-301",
+            ":ip":              "192.168.33.31",
+            ":host":            "dbs.server-301",
+            ":ssh_host":       {
+                                    ":host_port": 22,
+                                    ":guest_port": 2201,
+                                    ":id": "ssh"
+                                },
+            ":xe_db":           {
+                                    ":host_port": 1529,
+                                    ":guest_port": 1529,
+                                    ":id": "xe-db"
+                                },
+            ":xe_listen":       {
+                                    ":host_port": 8380,
+                                    ":guest_port": 8380,
+                                    ":id": "xe-listen"
+                                },
+            ":memory":          2048
+        }
+    }
+}
