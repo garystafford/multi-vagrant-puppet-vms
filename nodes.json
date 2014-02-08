@@ -5,8 +5,8 @@
             ":ip":             "192.168.33.21",
             ":host":           "apps.server-201",
             ":ssh_host":       {
-                                    ":host_port": 22,
-                                    ":guest_port": 2201,
+                                    ":host_port": 2201,
+                                    ":guest_port": 22,
                                     ":id": "ssh"
                                 },
             ":wls_admin":       {
@@ -21,8 +21,8 @@
             ":ip":              "192.168.33.31",
             ":host":            "dbs.server-301",
             ":ssh_host":       {
-                                    ":host_port": 22,
-                                    ":guest_port": 2201,
+                                    ":host_port": 2202,
+                                    ":guest_port": 22,
                                     ":id": "ssh"
                                 },
             ":xe_db":           {
