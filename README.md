@@ -1,21 +1,18 @@
-Vagrant Chef Oracle Project
----------------------------
+<h1>Vagrant Multiple-VM Creation and Configuration</h1>
 
-Vagrantfile to create (2) 64-bit Ubuntu Server-based Oracle/Java Development VMs with all applications other than an IDE, to build and test Java EE projects. Cookbook recipes located here: *[https://github.com/garystafford/chef-cookbooks] (https://github.com/garystafford/chef-cookbooks)*
+Vagrantfile project to create multiple VirtualBox VMs. Currently, configured to create (2) 64-bit Ubuntu Server-based Oracle VMs, used to build and test Java EE projects.
 
-<h4>Major Components</h4>
-* Oracle JDK 1.7.0_45-b18 64-bit for Linux x86-64 (apps vm)
-* Oracle-related Environment variables (apps vm)
-* WebLogic Server 12.1.2 (apps vm)
-* (1) WLS domain / (1) WLS managed server (apps vm)
+<h2>JSON Configuration File</h2>
+Vagrantfile retrieves the multiple VM configurations from a separate 'nodes.json' file. All configuration is abstracted out of Vagrantfile to json file. Just add additional VMs to the json file, following the existing json pattern. The Vagrantfile will loop through all nodes (VMs) in the json file and create VMs.
 
-* Oracle Database Express Edition 11g Release 2 (11.2) for Linux x86-64 (dbs vm)
+<h2>Forwarding Ports</h2>
+To create forwarding ports, use a ':port_' prefix to indicate a port to be forwarded. For example:
 
-<h4>Required artifacts downloaded to separate 'chef-artifacts' repo in same parent folder</h4>
-* *[jdk-7u45-linux-x64.tar.gz] (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)*
-* *[wls_121200.jar] (http://www.oracle.com/technetwork/middleware/weblogic/downloads/wls-for-dev-1703574.html)*
-* *[oracle-xe-11.2.0-1.0.x86_64.rpm.zip] (http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html)*
+<pre>":port_wls_admin": {
+        ":host": 7709,
+        ":guest": 7709,
+        ":id": "wls-listen"
+      }</pre>
 
-<h4>Ubuntu Cloud Image Used to Create VM</h4>
-* *[Preferred: Ubuntu Server 13.10 (Saucy Salamander) 64-bit daily build] (http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box)*
-* *[Alternate: Ubuntu Server 12.04 LTS (Precise Pangolin) 64-bit daily build] (http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box)*
+<h2>Chef Configuration</h2>
+Vagrantfile depends on Hosted Chef 'Environments' and 'Nodes' for configuration of VMs. This can easily be changes to 'Roles', if desired. Those Nodes use the Chef 'dev-setup' cookbook, located here: *[https://github.com/garystafford/chef-cookbooks] (https://github.com/garystafford/chef-cookbooks)*
