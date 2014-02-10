@@ -46,11 +46,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.provision :chef_client do |chef|
         chef.environment = ENVIRONMENT
         chef.provisioning_path = "/etc/chef"
-        chef.chef_server_url = "https://api.opscode.com/organizations/your-environment"
-        chef.validation_key_path = "~/.chef/your-user.pem"
+        chef.chef_server_url = "https://api.opscode.com/organizations/paychexenvironmentsteam"
+        chef.validation_key_path = "~/.chef/dev-ops.pem"
         chef.node_name = node[1][':node']
-        chef.validation_client_name = "your-user"
-        chef.client_key_path = "/etc/chef/your-user.pem"
+        chef.validation_client_name = "dev-ops"
+        chef.client_key_path = "/etc/chef/dev-ops.pem"
       end
     end
   end
