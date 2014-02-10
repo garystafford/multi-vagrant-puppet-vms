@@ -1,11 +1,11 @@
-<h1>Vagrant Multiple-VM Creation and Configuration</h1>
+<h2>Vagrant Multiple-VM Creation and Configuration</h2>
 
 Vagrantfile project to create multiple VirtualBox VMs. Currently, configured to create (2) 64-bit Ubuntu Server-based Oracle VMs, used to build and test Java EE projects.
 
-<h2>JSON Configuration File</h2>
+<b>JSON Configuration File</b>
 Vagrantfile retrieves the multiple VM configurations from a separate 'nodes.json' file. All configuration is abstracted out of Vagrantfile to json file. Just add additional VMs to the json file, following the existing json pattern. The Vagrantfile will loop through all nodes (VMs) in the json file and create VMs.
 
-<h2>Forwarding Ports</h2>
+<b>Forwarding Ports</b>
 To create forwarding ports, use a ':port_' prefix to indicate a port to be forwarded. For example:
 
 <pre>":port_wls_admin": {
@@ -14,5 +14,5 @@ To create forwarding ports, use a ':port_' prefix to indicate a port to be forwa
         ":id": "wls-listen"
       }</pre>
 
-<h2>Chef Configuration</h2>
+<b>Chef Configuration</b>
 Vagrantfile depends on Hosted Chef 'Environments' and 'Nodes' for configuration of VMs. This can easily be changes to 'Roles', if desired. Those Nodes use the Chef 'dev-setup' cookbook, located here: *[https://github.com/garystafford/chef-cookbooks] (https://github.com/garystafford/chef-cookbooks)*
