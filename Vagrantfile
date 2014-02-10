@@ -3,10 +3,10 @@
 
 # Multi-VM Configuration: WebLogic Application Server and Oracle Database Server
 # Author: Gary A. Stafford
-# Inspired from David Lutz's https://gist.github.com/dlutzy/2469037
-# Configures VMs based on Chef Server defined Environment and Node (vs. Roles)
+# Based on David Lutz's https://gist.github.com/dlutzy/2469037
+# Configures VMs based on Hosted Chef Server defined Environment and Node (vs. Roles)
 
-# node definitions
+# node configurations from json file
 nodes = JSON.parse(File.read("nodes.json"))
 nodes = nodes['nodes']
 
@@ -21,6 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.omnibus.chef_version = :latest
   
+  # configures all forwarding ports in json file
   nodes.each do |node|
     config.vm.define node[0] do |config|
       node[1].each do |k,v|
