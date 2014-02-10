@@ -10,8 +10,9 @@
 nodes = JSON.parse(File.read("nodes.json"))
 nodes = nodes['nodes']
 
-environment = "Development"
+ENVIRONMENT = "Development"
 VAGRANTFILE_API_VERSION = "2"
+
 Vagrant.require_plugin "vagrant-omnibus"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -20,55 +21,33 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.omnibus.chef_version = :latest
   
-  nodes.each do |opts|
-    config.vm.define opts[0] do |config|
-      # ssh port
-      if opts[1][':ssh_host'] then
-        config.vm.network :forwarded_port, 
-          host:  opts[1][':ssh_host'][':host_port'], 
-          guest: opts[1][':ssh_host'][':guest_port'], 
-          id:    opts[1][':ssh_host'][':id']
+  nodes.each do |node|
+    config.vm.define node[0] do |config|
+      node[1].each do |k,v|
+        if k.include? ":port_"
+          port = node[1][k]
+          config.vm.network :forwarded_port, 
+            host:  port[':host'], 
+            guest: port[':guest'], 
+            id:    port[':id']
+        end
       end
 
-      # Oracle WebLogic listen port
-      if opts[1][':wls_admin'] then
-        config.vm.network :forwarded_port, 
-          host:  opts[1][':wls_admin'][':host_port'], 
-          guest: opts[1][':wls_admin'][':guest_port'], 
-          id:    opts[1][':wls_admin'][':id']
-      end
-
-      # Oracle Database XE http port
-      if opts[1][':xe_db'] then
-        config.vm.network :forwarded_port, 
-          host:  opts[1][':xe_db'][':host_port'], 
-          guest: opts[1][':xe_db'][':guest_port'], 
-          id:    opts[1][':xe_db'][':id']
-      end
-
-      # Oracle Database XE database listener port
-      if opts[1][':xe_listen'] then
-        config.vm.network :forwarded_port, 
-          host:  opts[1][':xe_listen'][':host_port'], 
-          guest: opts[1][':xe_listen'][':guest_port'], 
-          id:    opts[1][':xe_listen'][':id']
-      end
-
-      config.vm.hostname = opts[1][':node']
-      config.vm.network :public_network, ip: opts[1][':ip']
+      config.vm.hostname = node[1][':node']
+      config.vm.network :public_network, ip: node[1][':ip']
       config.vm.synced_folder "#{ENV['HOME']}/Documents/GitHub/chef-artifacts", "/vagrant"
 
       config.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", opts[1][':memory']]
-        vb.customize ["modifyvm", :id, "--name", opts[1][':node']]
+        vb.customize ["modifyvm", :id, "--memory", node[1][':memory']]
+        vb.customize ["modifyvm", :id, "--name",   node[1][':node']]
       end
 
       config.vm.provision :chef_client do |chef|
-        chef.environment = environment
+        chef.environment = ENVIRONMENT
         chef.provisioning_path = "/etc/chef"
         chef.chef_server_url = "https://api.opscode.com/organizations/paychexenvironmentsteam"
         chef.validation_key_path = "~/.chef/dev-ops.pem"
-        chef.node_name = opts[1][':node']
+        chef.node_name = node[1][':node']
         chef.validation_client_name = "dev-ops"
         chef.client_key_path = "/etc/chef/dev-ops.pem"
       end
