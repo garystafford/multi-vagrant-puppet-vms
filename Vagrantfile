@@ -35,8 +35,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
 
       config.vm.hostname = node[1][':node']
-      config.vm.network :public_network, ip: node[1][':ip']
-      config.vm.synced_folder "#{ENV['HOME']}/Documents/GitHub/chef-artifacts", "/vagrant"
+      config.vm.network :private_network, ip: node[1][':ip']
+      config.vm.synced_folder "#{ENV['HOME']}/Documents/git_repos/chef-artifacts", "/vagrant"
 
       config.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--memory", node[1][':memory']]
