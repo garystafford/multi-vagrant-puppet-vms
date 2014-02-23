@@ -36,6 +36,22 @@
         ":id": "xe-listen"
       },
       ":memory": 2048
+    },
+    "web": {
+      ":node": "WebServer-401",
+      ":ip": "192.168.33.41",
+      ":host": "web.server-401",
+      ":port_ssh": {
+        ":host": 2203,
+        ":guest": 22,
+        ":id": "ssh"
+      },
+      ":port_apache": {
+        ":host": 4756,
+        ":guest": 4756,
+        ":id": "apache"
+      },
+      ":memory": 1024
     }
   }
 }
