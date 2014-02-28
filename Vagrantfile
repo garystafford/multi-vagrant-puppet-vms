@@ -6,11 +6,10 @@
 # Based on David Lutz's https://gist.github.com/dlutzy/2469037
 # Configures VMs based on Hosted Chef Server defined Environment and Node (vs. Roles)
 
-# node configurations from json file
-nodes = JSON.parse(File.read("nodes.json"))
-nodes = nodes['nodes']
+# node and chef configurations from json files
+nodes_config = (JSON.parse(File.read("nodes.json")))['nodes']
+chef_config  = (JSON.parse(File.read("chef.json")))['chef']
 
-ENVIRONMENT = "Development"
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.require_plugin "vagrant-omnibus"
@@ -22,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = :latest
   
   # configures all forwarding ports in json file
-  nodes.each do |node|
+  nodes_config.each do |node|
     config.vm.define node[0] do |config|
       node[1].each do |k,v|
         if k.include? ":port_"
@@ -36,6 +35,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       config.vm.hostname = node[1][':node']
       config.vm.network :private_network, ip: node[1][':ip']
+
+      # syncs local repository of large third-party installer files (quicker than downloading each time)  
       config.vm.synced_folder "#{ENV['HOME']}/Documents/git_repos/chef-artifacts", "/vagrant"
 
       config.vm.provider :virtualbox do |vb|
@@ -44,13 +45,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
 
       config.vm.provision :chef_client do |chef|
-        chef.environment = ENVIRONMENT
-        chef.provisioning_path = "/etc/chef"
-        chef.chef_server_url = "https://api.opscode.com/organizations/paychexenvironmentsteam"
-        chef.validation_key_path = "~/.chef/dev-ops.pem"
+        chef.environment = chef_config[':environment']
+        chef.provisioning_path = chef_config[':provisioning_path']
+        chef.chef_server_url = chef_config[':chef_server_url']
+        chef.validation_key_path = chef_config[':validation_key_path']
         chef.node_name = node[1][':node']
-        chef.validation_client_name = "dev-ops"
-        chef.client_key_path = "/etc/chef/dev-ops.pem"
+        chef.validation_client_name = chef_config[':validation_client_name']
+        chef.client_key_path = chef_config[':client_key_path']
       end
     end
   end

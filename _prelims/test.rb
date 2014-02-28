@@ -1,6 +1,6 @@
 require 'json'
 
-nodes = JSON.parse(File.read("nodes.json"))
+nodes = JSON.parse(File.read("../nodes.json"))
 nodes = nodes['nodes']
 
 nodes.each do |node|
@@ -15,3 +15,6 @@ nodes.each do |node|
     end
   end
 end
+
+chef_config = (JSON.parse(File.read("../chef.json")))['chef']
+puts chef_config[':provisioning_path']
