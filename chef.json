@@ -1,10 +1,10 @@
 {
-    "chef": {
-        ":chef_server_url": "https://api.opscode.com/organizations/paychexenvironmentsteam",
-        ":client_key_path": "/etc/chef/dev-ops.pem",
-        ":environment": "Development",
-        ":provisioning_path": "/etc/chef",
-        ":validation_client_name": "dev-ops",
-        ":validation_key_path": "~/.chef/dev-ops.pem"
-    }
+  "chef": {
+    ":chef_server_url": "https://api.opscode.com/organizations/paychexenvironmentsteam",
+    ":client_key_path": "/etc/chef/dev-ops.pem",
+    ":environment": "Development",
+    ":provisioning_path": "/etc/chef",
+    ":validation_client_name": "dev-ops",
+    ":validation_key_path": "~/.chef/dev-ops.pem"
+  }
 }
