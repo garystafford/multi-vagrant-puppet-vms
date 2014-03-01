@@ -22,12 +22,12 @@
       ":node": "DatabaseServer-301",
       ":ip": "192.168.33.31",
       ":host": "dbs.server-301",
-      ":port_ssh": {
-        ":host": 2202,
-        ":guest": 22,
-        ":id": "ssh"
-      },
       "ports": [
+        {
+          ":host": 2202,
+          ":guest": 22,
+          ":id": "ssh"
+        },
         {
           ":host": 1529,
           ":guest": 1529,
@@ -45,12 +45,12 @@
       ":node": "WebServer-401",
       ":ip": "192.168.33.41",
       ":host": "web.server-401",
-      ":port_ssh": {
-        ":host": 2203,
-        ":guest": 22,
-        ":id": "ssh"
-      },
       "ports": [
+        {
+          ":host": 2203,
+          ":guest": 22,
+          ":id": "ssh"
+        },
         {
           ":host": 4756,
           ":guest": 4756,
