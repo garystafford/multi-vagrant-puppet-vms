@@ -6,7 +6,7 @@
 # Based on David Lutz's https://gist.github.com/dlutzy/2469037
 # Configures VMs based on Hosted Chef Server defined Environment and Node (vs. Roles)
 
-# node and chef configurations from json files
+# vm and chef configurations from json files
 nodes_config = (JSON.parse(File.read("nodes.json")))['nodes']
 chef_config  = (JSON.parse(File.read("chef.json")))['chef']
 
@@ -21,36 +21,39 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = :latest
 
   nodes_config.each do |node|
-    current_node = node[1]
-    
-    # configures all forwarding ports in json file
-    ports = current_node['ports']
-    ports.each do |port|
-      config.vm.network :forwarded_port,
-        host:  port[':host'],
-        guest: port[':guest'],
-        id:    port[':id']
-    end
+    node_name = node[0] # name of node
+    node_values = node[1] # content of node
 
-    config.vm.hostname = current_node[':node']
-    config.vm.network :private_network, ip: current_node[':ip']
+    config.vm.define node_name do |config|    
+      # configures all forwarding ports in json file
+      ports = node_values['ports']
+      ports.each do |port|
+        config.vm.network :forwarded_port,
+          host: port[':host'],
+          guest: port[':guest'],
+          id: port[':id']
+      end
 
-    # syncs local repository of large third-party installer files (quicker than downloading each time)
-    config.vm.synced_folder "#{ENV['HOME']}/Documents/git_repos/chef-artifacts", "/vagrant"
+      config.vm.hostname = node_values[':node']
+      config.vm.network :private_network, ip: node_values[':ip']
 
-    config.vm.provider :virtualbox do |vb|
-      vb.customize ["modifyvm", :id, "--memory", current_node[':memory']]
-      vb.customize ["modifyvm", :id, "--name",   current_node[':node']]
-    end
+      # syncs local repository of large third-party installer files (quicker than downloading each time)
+      config.vm.synced_folder "#{ENV['HOME']}/Documents/git_repos/chef-artifacts", "/vagrant"
 
-    config.vm.provision :chef_client do |chef|
-      chef.environment = chef_config[':environment']
-      chef.provisioning_path = chef_config[':provisioning_path']
-      chef.chef_server_url = chef_config[':chef_server_url']
-      chef.validation_key_path = chef_config[':validation_key_path']
-      chef.node_name = current_node[':node']
-      chef.validation_client_name = chef_config[':validation_client_name']
-      chef.client_key_path = chef_config[':client_key_path']
+      config.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", node_values[':memory']]
+        vb.customize ["modifyvm", :id, "--name", node_values[':node']]
+      end
+
+      config.vm.provision :chef_client do |chef|
+        chef.environment = chef_config[':environment']
+        chef.provisioning_path = chef_config[':provisioning_path']
+        chef.chef_server_url = chef_config[':chef_server_url']
+        chef.validation_key_path = chef_config[':validation_key_path']
+        chef.node_name = node_values[':node']
+        chef.validation_client_name = chef_config[':validation_client_name']
+        chef.client_key_path = chef_config[':client_key_path']
+      end
     end
   end
 end
