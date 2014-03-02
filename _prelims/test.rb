@@ -3,27 +3,28 @@
 
 require 'json'
 
-nodes = (JSON.parse(File.read("../nodes.json")))['nodes']
+nodes_config = (JSON.parse(File.read("../nodes.json")))['nodes']
+chef_config  = (JSON.parse(File.read("../chef.json")))['chef']
 
-# current method to get ports from array
-nodes.each do |node|
-  #puts node
-      current_node = node[1]
-#puts current_node
-#puts node[0]
+nodes_config.each do |node|
+  puts node
+  current_node = node[1]
+  puts current_node
+  puts node[0]
   ports = node[1]['ports']
   puts ports
-  current_node[':node']
+  node[1][':node']
+
   ports.each do |port|
-    #puts port[':host']
-    #puts port[':guest']
-    #puts port[':id']
+    puts port[':host']
+    puts port[':guest']
+    puts port[':id']
   end
 end
 
 =begin
 # original method to get ports
-nodes.each do |node|
+nodes_config.each do |node|
   puts node[0]
   node[1].each do |k,v|
     if k.include? ":port_"
@@ -36,5 +37,4 @@ nodes.each do |node|
 end
 =end
 
-chef_config = (JSON.parse(File.read("../chef.json")))['chef']
 puts chef_config[':provisioning_path']
