@@ -15,13 +15,13 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.require_plugin "vagrant-omnibus"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "vagrant-oracle-vm-saucy64"
+  config.vm.box     = "vagrant-oracle-vm-saucy64"
   config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box"
 
   config.omnibus.chef_version = :latest
 
   nodes_config.each do |node|
-    node_name = node[0] # name of node
+    node_name   = node[0] # name of node
     node_values = node[1] # content of node
 
     config.vm.define node_name do |config|    
@@ -29,9 +29,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ports = node_values['ports']
       ports.each do |port|
         config.vm.network :forwarded_port,
-          host: port[':host'],
+          host:  port[':host'],
           guest: port[':guest'],
-          id: port[':id']
+          id:    port[':id']
       end
 
       config.vm.hostname = node_values[':node']
