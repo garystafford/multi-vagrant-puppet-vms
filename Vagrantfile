@@ -3,7 +3,7 @@
 
 # Multi-VM Configuration: WebLogic Application Server and Oracle Database Server
 # Author: Gary A. Stafford
-# Based on David Lutz's https://gist.github.com/dlutzy/2469037
+# Originally based on David Lutz's https://gist.github.com/dlutzy/2469037
 # Configures VMs based on Hosted Chef Server defined Environment and Node (vs. Roles)
 
 # vm and chef configurations from json files
