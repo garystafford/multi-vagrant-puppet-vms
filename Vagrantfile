@@ -1,12 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Multi-VM Configuration: WebLogic Application Server and Oracle Database Server
-# Author: Gary A. Stafford
-# Originally based on David Lutz's https://gist.github.com/dlutzy/2469037
+# Multi-VM Configuration: Builds Web, Application, and Database Servers using JSON config file
 # Configures VMs based on Hosted Chef Server defined Environment and Node (vs. Roles)
+# Author: Gary A. Stafford
 
-# vm and chef configurations from json files
+# read vm and chef configurations from JSON files
 nodes_config = (JSON.parse(File.read("nodes.json")))['nodes']
 chef_config  = (JSON.parse(File.read("chef.json")))['chef']
 
@@ -25,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node_values = node[1] # content of node
 
     config.vm.define node_name do |config|    
-      # configures all forwarding ports in json file
+      # configures all forwarding ports in JSON array
       ports = node_values['ports']
       ports.each do |port|
         config.vm.network :forwarded_port,
@@ -45,6 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--name", node_values[':node']]
       end
 
+      # chef configuration section
       config.vm.provision :chef_client do |chef|
         chef.environment = chef_config[':environment']
         chef.provisioning_path = chef_config[':provisioning_path']
