@@ -3,8 +3,6 @@
 # Run on VM to setup Puppet Master server
 # http://blog.kloudless.com/2013/07/01/automating-development-environments-with-vagrant-and-puppet/
 
-set -e
-
 if ps aux | grep "puppet master" | grep -v grep > /dev/null
 then
     echo "Puppet Master is already installed. Exiting..."
@@ -14,11 +12,9 @@ else
     sudo apt-get update -yq && sudo apt-get upgrade -yq && \
     sudo apt-get install -yq puppetmaster git
 
-    sleep 2
-
-    echo "\n# Host config for vagrant-docker-puppet demo" | sudo tee --append  /etc/hosts > /dev/null && \
-    echo "192.168.1.77    gstafford-X555LA"   | sudo tee --append  /etc/hosts > /dev/null && \
-    echo "192.168.32.5    puppet"             | sudo tee --append  /etc/hosts > /dev/null && \
+    echo "" | sudo tee --append  /etc/hosts > /dev/null && \
+    echo "# Host config for vagrant-docker-puppet demo" | sudo tee --append  /etc/hosts > /dev/null && \
+    echo "192.168.32.5    puppet" | sudo tee --append  /etc/hosts > /dev/null && \
     echo "192.168.32.10   node01" | sudo tee --append  /etc/hosts > /dev/null && \
     echo "192.168.32.20   node02" | sudo tee --append  /etc/hosts > /dev/null && \
     echo "192.168.32.30   node03" | sudo tee --append  /etc/hosts > /dev/null

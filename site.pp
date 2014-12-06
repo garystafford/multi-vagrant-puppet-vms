@@ -1,15 +1,18 @@
-#node "dockervm-03" {
-file { "/home/vagrant/helloworld.txt":
-  ensure => file,
-  owner  => "vagrant",
-  group  => "vagrant",
-  mode   => 0644
-}
+node "default" {
+# Test 1 : Create File
+  file { "/home/vagrant/puppet_test.txt":
+    ensure => file,
+    owner  => "vagrant",
+    group  => "vagrant",
+    mode   => 0644
+  }
 
-notify { "This message is getting logged on the agent node.": }
+# Test 2 : Message
+  notify { "This test message is getting logged this node.": }
 
-class { '::ntp':
-  servers => ['pool.ntp.org','utcnist.colorado.edu'],
-  udlc    => true,
+# Test 3: Install ntp
+  class { '::ntp':
+    servers => ['pool.ntp.org','utcnist.colorado.edu'],
+    udlc    => true,
+  }
 }
-#}

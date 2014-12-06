@@ -16,7 +16,7 @@ sudo puppet cert list --all # check for 'puppet' cert
 Shift+Ctrl+T # new tab
 vagrant ssh puppetnode-01
 sh /vagrant/bootstrap-node.sh
-sudo puppet agent --test # will now wait for signature on puppetmaster...
+sudo puppet agent --test --waitforcert=60 # will now wait for signature on puppetmaster...
 ```
 Back on puppetmaster
 ```
@@ -45,4 +45,4 @@ Used by Vagrant and VirtualBox. To create additional forwarding ports, add them 
 `vagrant reload`                    # runs halt and up all Vagrant machines (if you make changes to the Vagrantfile)  
 `vagrant destroy -f && vagrant up`  # destroys and recreates all Vagrant machines  
 `vagrant status`                    # state of the machines Vagrant is managing  
-`vagrant ssh <machine>`             # ssh into SSH into a running Vagrant machine (ie. 'puppetmaster')   
+`vagrant ssh <machine>`             # ssh into SSH into a running Vagrant machine (ie. 'puppetmaster')
