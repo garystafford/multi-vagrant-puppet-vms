@@ -1,14 +1,19 @@
 ##Vagrant Multiple-VM Creation and Configuration
 
-A Vagrant project to create multiple VirtualBox VMs using JSON configuration files. Currently, provisions (3) 64-bit Ubuntu Server-based VMs: Web, Application, and Database.
+Builds Puppet Master and multiple Puppet Agent Nodes using JSON config file
 
 #### JSON Configuration File
-The Vagrantfile retrieves multiple VM configurations from a separate '`nodes.json`' file. All VM configuration is contained in the JSON file. You can add additional VMs to the JSON file, following the existing pattern. The Vagrantfile will loop through all nodes (VMs) in the '`nodes.json`' file and create the VMs. You can easily swap configuration files for alternate environments since the Vagrantfile is designed to be generic and portable.
+The Vagrantfile retrieves multiple VM configurations from a separate '`nodes.json`' file.
+All VM configuration is contained in the JSON file. You can add additional VMs to the JSON file,
+following the existing pattern. The Vagrantfile will loop through all nodes (VMs) in the '`nodes.json`'
+file and create the VMs. You can easily swap configuration files for alternate environments since the
+Vagrantfile is designed to be generic and portable.
 
 #### Forwarding Ports
 To create additional forwarding ports, add them to the 'ports' array. For example:
 
- ```"ports": [
+ ```
+ "ports": [
         {
           ":host": 1234,
           ":guest": 2234,
@@ -19,7 +24,36 @@ To create additional forwarding ports, add them to the 'ports' array. For exampl
           ":guest": 6789,
           ":id": "port-2"
         }
-      ]```
+      ]
+      ```
 
-#### Chef Configuration
-The Vagrantfile uses Chef, which in turn uses a Hosted Chef account's 'Environments' and 'Nodes' for configuration of VMs. This can easily be changed to use 'Roles', if desired. The Hosted Chef 'Nodes' use recipes from the '`dev-setup`', located here: [https://github.com/garystafford/chef-cookbooks](https://github.com/garystafford/chef-cookbooks)    
+#### Useful Multi-VM Commands
+`vagrant up`                        # creates and configures all Vagrant machines  
+`vagrant reload`                    # runs halt and up all Vagrant machines (if you make changes to the Vagrantfile)  
+`vagrant destroy -f && vagrant up`  # destroys and recreates all Vagrant machines  
+`vagrant status`                    # state of the machines Vagrant is managing  
+`vagrant ssh <machine>`             # ssh into SSH into a running Vagrant machine (ie. 'puppetmaster')  
+
+#### Instructions
+```
+vagrant up
+vagrant ssh puppetmaster
+sh /vagrant/bootstrap-master.sh
+sudo service puppetmaster stop
+sudo puppet master --verbose --no-daemonize
+Ctrl+C # kill puppet master
+sudo service puppetmaster start
+sudo puppet cert list --all # check for 'puppet' cert
+
+Shift+Ctrl+T # new tab
+vagrant ssh puppetnode-01
+sh /vagrant/bootstrap-node.sh
+sudo puppet agent --test --waitforcert=60
+```
+
+Back on puppetmaster
+```
+sudo puppet cert list # should see 'node01' cert wating for signature
+sudo puppet cert sign --all
+sudo puppet cert list --all # check for 'node01' cert
+```

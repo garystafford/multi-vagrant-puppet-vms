@@ -1,63 +1,20 @@
 {
   "nodes": {
-    "apps": {
-      ":node": "ApplicationServer-201",
-      ":ip": "192.168.33.21",
-      ":host": "apps.server-201",
-      "ports": [
-        {
-          ":host": 2201,
-          ":guest": 22,
-          ":id": "ssh"
-        },
-        {
-          ":host": 7709,
-          ":guest": 7709,
-          ":id": "wls-listen"
-        }
-      ],
-      ":memory": 2048
+    "puppetmaster": {
+      ":node": "puppet",
+      ":ip": "192.168.32.05",
+      ":host": "puppet",
+      "ports": [],
+      ":memory": 1024,
+      ":bootstrap": "bootstrap-master.sh"
     },
-    "dbs": {
-      ":node": "DatabaseServer-301",
-      ":ip": "192.168.33.31",
-      ":host": "dbs.server-301",
-      "ports": [
-        {
-          ":host": 2202,
-          ":guest": 22,
-          ":id": "ssh"
-        },
-        {
-          ":host": 1529,
-          ":guest": 1529,
-          ":id": "xe-db"
-        },
-        {
-          ":host": 8380,
-          ":guest": 8380,
-          ":id": "xe-listen"
-        }
-      ],
-      ":memory": 2048
-    },
-    "web": {
-      ":node": "WebServer-401",
-      ":ip": "192.168.33.41",
-      ":host": "web.server-401",
-      "ports": [
-        {
-          ":host": 2203,
-          ":guest": 22,
-          ":id": "ssh"
-        },
-        {
-          ":host": 4756,
-          ":guest": 4756,
-          ":id": "apache"
-        }
-      ],
-      ":memory": 1024
+    "puppetnode-01": {
+      ":node": "node01",
+      ":ip": "192.168.32.10",
+      ":host": "node01",
+      "ports": [],
+      ":memory": 1024,
+      ":bootstrap": "bootstrap-node.sh"
     }
   }
 }
