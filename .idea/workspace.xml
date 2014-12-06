@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d3eee31-431a-4e42-b77a-9c55df559917" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/site.pp" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_prelims/Vagrantfile_config_in_file_v1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_prelims/Vagrantfile_json_v2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_prelims/nodes_v1.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_prelims/test.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chef.json" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Vagrantfile" afterPath="$PROJECT_DIR$/Vagrantfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nodes.json" afterPath="$PROJECT_DIR$/nodes.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="multi-vagrant-puppet-vms.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,8 +40,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07874016" vertical-offset="0" max-vertical-offset="960">
-              <caret line="2" column="18" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9130435" vertical-offset="369" max-vertical-offset="795">
+              <caret line="47" column="105" selection-start-line="47" selection-start-column="105" selection-end-line="47" selection-end-column="105" />
               <folding />
             </state>
           </provider>
@@ -434,8 +427,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07874016" vertical-offset="0" max-vertical-offset="960">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.9130435" vertical-offset="369" max-vertical-offset="795">
+          <caret line="47" column="105" selection-start-line="47" selection-start-column="105" selection-end-line="47" selection-end-column="105" />
           <folding />
         </state>
       </provider>
