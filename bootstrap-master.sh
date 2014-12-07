@@ -22,8 +22,12 @@ else
     sudo sed -i 's/.*\[main\].*/&\ndns_alt_names = puppet,puppetvm,puppetvm.com/' /etc/puppet/puppet.conf
 
     sudo cp /vagrant/site.pp /etc/puppet/manifests/site.pp
+
     sudo puppet module install puppetlabs-ntp
     sudo puppet module install garethr-docker
+    sudo puppet module install puppetlabs-git
+    sudo puppet module install puppetlabs-vcsrepo
+
     sudo puppet apply /etc/puppet/manifests/site.pp
 
     # not working right now...do manually...

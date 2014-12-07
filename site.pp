@@ -19,6 +19,7 @@ node "default" {
 
 node "node01" {
   include 'docker'
+  include 'git'
 
   docker::image { 'ubuntu':
     image_tag => 'trusty'
@@ -26,5 +27,11 @@ node "node01" {
 
   docker::image { 'node':
     image_tag => 'latest'
+  }
+
+  vcsrepo { "/vagrant/mean-estimator":
+    ensure   => present,
+    provider => git,
+    source   => "https://github.com/garystafford/mean-estimator.git",
   }
 }
