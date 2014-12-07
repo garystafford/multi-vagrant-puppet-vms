@@ -23,6 +23,7 @@ else
 
     sudo cp /vagrant/site.pp /etc/puppet/manifests/site.pp
     sudo puppet module install puppetlabs-ntp
+    sudo puppet module install garethr-docker
     sudo puppet apply /etc/puppet/manifests/site.pp
 
     # not working right now...do manually...
