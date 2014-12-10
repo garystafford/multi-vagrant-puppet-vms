@@ -1,34 +1,26 @@
 node "default" {
-## Test 1 : Create File
-#  file { "/home/vagrant/puppet_test.txt":
-#    ensure => file,
-#    owner  => "vagrant",
-#    group  => "vagrant",
-#    mode   => 0644
-#  }
-#
-## Test 2 : Message
-#  notify { "This test message is getting logged this node.": }
-
-# Install ntp
-  class { '::ntp':
-    servers => ['pool.ntp.org','utcnist.colorado.edu'],
-    udlc    => true,
-  }
+# Test Message
+  notify { "This test message is getting logged on $::fqdn.": }
+  include 'fig'
 }
 
 node "node01" {
+  include 'ntp'
   include 'docker'
   include 'git'
+  include 'fig'
 
+# install ubuntu docker image
   docker::image { 'ubuntu':
     image_tag => 'trusty'
   }
 
+# install node docker image
   docker::image { 'node':
     image_tag => 'latest'
   }
 
+# git clone mean-estimator repo
   vcsrepo { "/vagrant/mean-estimator":
     ensure   => present,
     provider => git,

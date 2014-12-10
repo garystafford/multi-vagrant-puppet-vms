@@ -16,7 +16,7 @@ sudo puppet cert list --all # check for 'puppet' cert
 Shift+Ctrl+T # new tab
 vagrant ssh puppetnode-01
 sh /vagrant/bootstrap-node.sh
-sudo puppet agent --test --waitforcert=60 # will now wait for signature on puppetmaster...
+sudo puppet agent --test --waitforcert=60
 ```
 Back on puppetmaster
 ```

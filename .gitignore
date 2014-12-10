@@ -59,3 +59,5 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+install-docker.sh
