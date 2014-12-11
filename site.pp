@@ -1,14 +1,10 @@
-node "default" {
+node 'default' {
 # Test Message
-  notify { "This test message is getting logged on $::fqdn.": }
-  include 'fig'
+  notify { 'This test message is getting logged on $::fqdn.': }
 }
 
-node "node01" {
-  include 'ntp'
-  include 'docker'
-  include 'git'
-  include 'fig'
+node 'node01' {
+  include ntp, git, docker, fig
 
 # install ubuntu docker image
   docker::image { 'ubuntu':
@@ -21,9 +17,9 @@ node "node01" {
   }
 
 # git clone mean-estimator repo
-  vcsrepo { "/vagrant/mean-estimator":
+  vcsrepo { '/vagrant/mean-estimator':
     ensure   => present,
     provider => git,
-    source   => "https://github.com/garystafford/mean-estimator.git",
+    source   => 'https://github.com/garystafford/mean-estimator.git'
   }
 }
