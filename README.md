@@ -1,4 +1,4 @@
-##Vagrant Multiple-VM Creation and Configuration
+## Vagrant Multiple-VM Creation and Configuration
 Builds Puppet Master and multiple Puppet Agent Nodes using JSON config file
 #### JSON Configuration File
 The Vagrantfile retrieves multiple VM configurations from a separate `nodes.json` file. All VM configuration is contained in the JSON file. You can add additional VMs to the JSON file, following the existing pattern. The Vagrantfile will loop through all nodes (VMs) in the `nodes.json` file and create the VMs. You can easily swap configuration files for alternate environments since the Vagrantfile is designed to be generic and portable.
