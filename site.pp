@@ -18,10 +18,10 @@ node 'node01', 'node02' inherits basenode {
     image_tag => 'latest'
   }
 
-# git clone mean-estimator repo
-  vcsrepo { '/vagrant/mean-estimator':
-    ensure   => present,
-    provider => git,
-    source   => 'https://github.com/garystafford/mean-estimator.git'
-  }
+## git clone mean-estimator repo
+#  vcsrepo { '/vagrant/mean-estimator':
+#    ensure   => present,
+#    provider => git,
+#    source   => 'https://github.com/garystafford/mean-estimator.git'
+#  }
 }
