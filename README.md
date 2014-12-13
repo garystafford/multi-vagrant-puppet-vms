@@ -6,10 +6,13 @@ The Vagrantfile retrieves multiple VM configurations from a separate `nodes.json
 ```
 vagrant up
 vagrant ssh puppetmaster
+
 sh /vagrant/bootstrap-master.sh
+
+sudo service puppetmaster status # test that Puppet Master is installed
 sudo service puppetmaster stop
 sudo puppet master --verbose --no-daemonize
-Ctrl+C # kill puppet master
+# Ctrl+C to kill puppet master
 sudo service puppetmaster start
 sudo puppet cert list --all # check for 'puppet' cert
 

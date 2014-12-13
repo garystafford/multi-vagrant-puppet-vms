@@ -21,21 +21,15 @@ else
 
     sudo puppet resource service puppet ensure=running enable=true
 
+    # Configure /etc/hosts file
     echo "" | sudo tee --append  /etc/hosts > /dev/null && \
-    echo "# Host config for vagrant-docker-puppet demo" | sudo tee --append  /etc/hosts > /dev/null && \
+    echo "# Host config for Puppet Master and Agent Nodes" | sudo tee --append  /etc/hosts > /dev/null && \
     echo "192.168.32.5    puppet" | sudo tee --append  /etc/hosts > /dev/null && \
     echo "192.168.32.10   node01" | sudo tee --append  /etc/hosts > /dev/null && \
-    echo "192.168.32.20   node02" | sudo tee --append  /etc/hosts > /dev/null && \
-    echo "192.168.32.30   node03" | sudo tee --append  /etc/hosts > /dev/null
+    echo "192.168.32.20   node02" | sudo tee --append  /etc/hosts > /dev/null
 
-    # certs did not work with alt dns names like puppetmaster01
-    echo "" && \
-    echo "[agent]\nserver=puppet" | sudo tee --append  /etc/puppet/puppet.conf > /dev/null
-
-    # Is this what gets cert sent to master? 'restart' failed.
-    #sudo service puppet stop && \
-    #sleep 2 && \
-    #sudo service puppet start
+    # Add optional alternate DNS names to /etc/puppet/puppet.conf
+    echo "" && echo "[agent]\nserver=puppet" | sudo tee --append  /etc/puppet/puppet.conf > /dev/null
 
     sudo puppet agent --enable
 fi

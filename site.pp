@@ -1,10 +1,12 @@
-node 'default' {
-# Test Message
+node basenode {
+# Test message
   notify { 'This test message is getting logged on $::fqdn.': }
+
+  include ntp, git
 }
 
-node 'node01' {
-  include ntp, git, docker, fig
+node 'node01', 'node02' inherits basenode {
+  include docker, fig
 
 # install ubuntu docker image
   docker::image { 'ubuntu':
