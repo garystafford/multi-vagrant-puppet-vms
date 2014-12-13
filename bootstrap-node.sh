@@ -28,7 +28,7 @@ else
     echo "192.168.32.10   node01" | sudo tee --append  /etc/hosts > /dev/null && \
     echo "192.168.32.20   node02" | sudo tee --append  /etc/hosts > /dev/null
 
-    # Add optional alternate DNS names to /etc/puppet/puppet.conf
+    # Add agent section to /etc/puppet/puppet.conf
     echo "" && echo "[agent]\nserver=puppet" | sudo tee --append  /etc/puppet/puppet.conf > /dev/null
 
     sudo puppet agent --enable

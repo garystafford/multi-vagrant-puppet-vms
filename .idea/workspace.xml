@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d3eee31-431a-4e42-b77a-9c55df559917" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap-master.sh" afterPath="$PROJECT_DIR$/bootstrap-master.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap-node.sh" afterPath="$PROJECT_DIR$/bootstrap-node.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nodes.json" afterPath="$PROJECT_DIR$/nodes.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/site.pp" afterPath="$PROJECT_DIR$/site.pp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="multi-vagrant-puppet-vms.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="bootstrap-master.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bootstrap-master.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bootstrap-master.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8606557" vertical-offset="225" max-vertical-offset="720">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="720">
+              <caret line="21" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -75,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap-node.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bootstrap-node.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bootstrap-node.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="600">
-              <caret line="21" column="66" selection-start-line="21" selection-start-column="66" selection-end-line="21" selection-end-column="66" />
+            <state vertical-scroll-proportion="1.1873351" vertical-offset="0" max-vertical-offset="600">
+              <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -121,10 +115,10 @@
         <option value="$PROJECT_DIR$/install-docker.sh" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/site.pp" />
-        <option value="$PROJECT_DIR$/bootstrap-node.sh" />
         <option value="$PROJECT_DIR$/nodes.json" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/bootstrap-master.sh" />
+        <option value="$PROJECT_DIR$/bootstrap-node.sh" />
       </list>
     </option>
   </component>
@@ -417,14 +411,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bootstrap-node.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="600">
-          <caret line="21" column="66" selection-start-line="21" selection-start-column="66" selection-end-line="21" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Vagrantfile">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
@@ -454,8 +440,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bootstrap-master.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8606557" vertical-offset="225" max-vertical-offset="720">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="720">
+          <caret line="21" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap-node.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1873351" vertical-offset="0" max-vertical-offset="600">
+          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
           <folding />
         </state>
       </provider>
