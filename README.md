@@ -4,28 +4,30 @@ Builds Puppet Master and multiple Puppet Agent Nodes using JSON config file
 The Vagrantfile retrieves multiple VM configurations from a separate `nodes.json` file. All VM configuration is contained in the JSON file. You can add additional VMs to the JSON file, following the existing pattern. The Vagrantfile will loop through all nodes (VMs) in the `nodes.json` file and create the VMs. You can easily swap configuration files for alternate environments since the Vagrantfile is designed to be generic and portable.
 #### Instructions
 ```
-vagrant up
+vagrant up # brings up all VMs
 vagrant ssh puppetmaster
 
-sh /vagrant/bootstrap-master.sh
+sh /vagrant/bootstrap-master.sh # run bootstrap script
 
-sudo service puppetmaster status # test that Puppet Master is installed
+sh /vagrant/bootstrap-master.sh # run bootstrap script
+sudo service puppetmaster status # test that puppet master was installed
 sudo service puppetmaster stop
 sudo puppet master --verbose --no-daemonize
 # Ctrl+C to kill puppet master
 sudo service puppetmaster start
 sudo puppet cert list --all # check for 'puppet' cert
 
-Shift+Ctrl+T # new tab
-vagrant ssh puppetnode-01
-sh /vagrant/bootstrap-node.sh
-sudo puppet agent --test --waitforcert=60
+# Shift+Ctrl+T # new tab on host
+vagrant ssh puppetnode-01 # ssh into agent node
+sh /vagrant/bootstrap-node.sh # run bootstrap script
+sudo service puppet status # test that agent was installed
+sudo puppet agent --test --waitforcert=60 # initiate certificate signing request (CSR)
 ```
-Back on puppetmaster
+Back on the Puppet Master server (puppetmaster)
 ```
-sudo puppet cert list # should see 'node01' cert wating for signature
-sudo puppet cert sign --all
-sudo puppet cert list --all # check for 'node01' cert
+sudo puppet cert list # should see 'node01' cert waiting for signature
+sudo puppet cert sign --all # sign the agent node(s) cert(s)
+sudo puppet cert list --all # check for signed cert(s)
 ```
 #### Forwarding Ports
 Used by Vagrant and VirtualBox. To create additional forwarding ports, add them to the 'ports' array. For example:
@@ -44,8 +46,11 @@ Used by Vagrant and VirtualBox. To create additional forwarding ports, add them 
       ]
 ```
 #### Useful Multi-VM Commands
-`vagrant up`                        # creates and configures all Vagrant machines  
-`vagrant reload`                    # runs halt and up all Vagrant machines (if you make changes to the Vagrantfile)  
-`vagrant destroy -f && vagrant up`  # destroys and recreates all Vagrant machines  
-`vagrant status`                    # state of the machines Vagrant is managing  
-`vagrant ssh <machine>`             # ssh into SSH into a running Vagrant machine (ie. 'puppetmaster')
+The use of the specific <machine> name is optional.
+`vagrant up <machine>`
+`vagrant reload <machine>`
+`vagrant destroy -f <machine> && vagrant up <machine>`
+`vagrant status <machine>`
+`vagrant ssh <machine>`
+`vagrant global-status`
+`facter`

@@ -1,27 +1,13 @@
-node basenode {
+node default {
 # Test message
-  notify { 'This test message is getting logged on $::fqdn.': }
+  notify { "Debug output on ${hostname} node.": }
 
   include ntp, git
 }
 
-node 'node01', 'node02' inherits basenode {
-  include docker, fig
+node 'node01', 'node02' {
+# Test message
+  notify { "Debug output on ${hostname} node.": }
 
-# install ubuntu docker image
-  docker::image { 'ubuntu':
-    image_tag => 'trusty'
-  }
-
-# install node docker image
-  docker::image { 'node':
-    image_tag => 'latest'
-  }
-
-## git clone mean-estimator repo
-#  vcsrepo { '/vagrant/mean-estimator':
-#    ensure   => present,
-#    provider => git,
-#    source   => 'https://github.com/garystafford/mean-estimator.git'
-#  }
+  include ntp, git, docker, fig
 }
