@@ -22,14 +22,14 @@ else
     sudo puppet resource service puppet ensure=running enable=true
 
     # Configure /etc/hosts file
-    echo "" | sudo tee --append  /etc/hosts 2> /dev/null && \
-    echo "# Host config for Puppet Master and Agent Nodes" | sudo tee --append  /etc/hosts 2> /dev/null && \
-    echo "192.168.32.5    puppet" | sudo tee --append  /etc/hosts 2> /dev/null && \
-    echo "192.168.32.10   node01" | sudo tee --append  /etc/hosts 2> /dev/null && \
-    echo "192.168.32.20   node02" | sudo tee --append  /etc/hosts 2> /dev/null
+    echo "" | sudo tee --append /etc/hosts 2> /dev/null && \
+    echo "# Host config for Puppet Master and Agent Nodes" | sudo tee --append /etc/hosts 2> /dev/null && \
+    echo "192.168.32.5    puppet" | sudo tee --append /etc/hosts 2> /dev/null && \
+    echo "192.168.32.10   node01" | sudo tee --append /etc/hosts 2> /dev/null && \
+    echo "192.168.32.20   node02" | sudo tee --append /etc/hosts 2> /dev/null
 
     # Add agent section to /etc/puppet/puppet.conf
-    echo "" && echo "[agent]\nserver=puppet" | sudo tee --append  /etc/puppet/puppet.conf 2> /dev/null
+    echo "" && echo "[agent]\nserver=puppet" | sudo tee --append /etc/puppet/puppet.conf 2> /dev/null
 
     sudo puppet agent --enable
 fi
