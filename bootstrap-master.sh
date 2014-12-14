@@ -18,7 +18,7 @@ else
     echo "# Host config for Puppet Master and Agent Nodes" | sudo tee --append  /etc/hosts 2> /dev/null && \
     echo "192.168.32.5    puppet" | sudo tee --append  /etc/hosts 2> /dev/null && \
     echo "192.168.32.10   node01" | sudo tee --append  /etc/hosts 2> /dev/null && \
-    echo "192.168.32.20   node02" | sudo tee --append  /etc/hosts > /dev/null
+    echo "192.168.32.20   node02" | sudo tee --append  /etc/hosts 2> /dev/null
 
     # Add optional alternate DNS names to /etc/puppet/puppet.conf
     sudo sed -i 's/.*\[main\].*/&\ndns_alt_names = puppet,puppetvm,puppetvm.com/' /etc/puppet/puppet.conf
@@ -29,14 +29,6 @@ else
     sudo puppet module install puppetlabs-git
     sudo puppet module install puppetlabs-vcsrepo
 
-    # Copy main manifest from Vagrant synced folder location
-    sudo cp /vagrant/site.pp /etc/puppet/manifests/site.pp
-
-    # Apply the site.pp manifest to the Puppet Master server
-    sudo puppet apply /etc/puppet/manifests/site.pp 2> /dev/null
-
-    # not working right now...do manually...
-    #sudo service puppetmaster stop
-    #sudo puppet master --verbose --no-daemonize & sleep 2 && kill -INT # need to add force break ctrl c
-    #sudo service puppetmaster start
+    # symlink manifest from Vagrant synced folder location
+    ln -s /vagrant/site.pp /etc/puppet/manifests/site.pp
 fi
