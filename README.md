@@ -54,3 +54,5 @@ The use of the specific <machine> name is optional.
 `vagrant ssh <machine>`
 `vagrant global-status`
 `facter`
+`sudo tail -50 /var/log/syslog'
+`sudo tail -50 /var/log/puppet/masterhttp.log`
