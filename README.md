@@ -1,7 +1,15 @@
 ## Vagrant Multiple-VM Creation and Configuration
-Builds Puppet Master and multiple Puppet Agent Nodes using JSON config file
+Automatically provision multiple VMs with Vagrant and VirtualBox. Automatically install, configure, and test
+Puppet Master and Puppet Agents on those VMs. All instructions can be found in my blog post:
+[http://wp.me/p1RD28-1kX](http://wp.me/p1RD28-1kX)
+
+
 #### JSON Configuration File
-The Vagrantfile retrieves multiple VM configurations from a separate `nodes.json` file. All VM configuration is contained in the JSON file. You can add additional VMs to the JSON file, following the existing pattern. The Vagrantfile will loop through all nodes (VMs) in the `nodes.json` file and create the VMs. You can easily swap configuration files for alternate environments since the Vagrantfile is designed to be generic and portable.
+The Vagrantfile retrieves multiple VM configurations from a separate `nodes.json` file. All VM configuration is
+contained in the JSON file. You can add additional VMs to the JSON file, following the existing pattern. The
+Vagrantfile will loop through all nodes (VMs) in the `nodes.json` file and create the VMs. You can easily swap
+configuration files for alternate environments since the Vagrantfile is designed to be generic and portable.
+
 #### Instructions
 ```
 vagrant up # brings up all VMs

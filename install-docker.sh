@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Manually install Docker and Fig - has been replaced with Puppet
+
 # Docker (https://docs.docker.com/installation/ubuntulinux/#ubuntu-trusty-1404-lts-64-bit)
 curl -sSL https://get.docker.com/ubuntu/ | sudo sh
 
