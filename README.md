@@ -55,12 +55,12 @@ Used by Vagrant and VirtualBox. To create additional forwarding ports, add them 
 ```
 #### Useful Multi-VM Commands
 The use of the specific <machine> name is optional.
-`vagrant up <machine>`
-`vagrant reload <machine>`
-`vagrant destroy -f <machine> && vagrant up <machine>`
-`vagrant status <machine>`
-`vagrant ssh <machine>`
-`vagrant global-status`
-`facter`
-`sudo tail -50 /var/log/syslog'
-`sudo tail -50 /var/log/puppet/masterhttp.log`
+* `vagrant up <machine>`
+* `vagrant reload <machine>`
+* `vagrant destroy -f <machine> && vagrant up <machine>`
+* `vagrant status <machine>`
+* `vagrant ssh <machine>`
+* `vagrant global-status`
+* `facter`
+* `sudo tail -50 /var/log/syslog`
+* `sudo tail -50 /var/log/puppet/masterhttp.log`
