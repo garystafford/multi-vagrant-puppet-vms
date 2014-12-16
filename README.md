@@ -13,11 +13,8 @@ configuration files for alternate environments since the Vagrantfile is designed
 #### Instructions
 ```
 vagrant up # brings up all VMs
-vagrant ssh puppetmaster
+vagrant ssh puppet.example.com
 
-sh /vagrant/bootstrap-master.sh # run bootstrap script
-
-sh /vagrant/bootstrap-master.sh # run bootstrap script
 sudo service puppetmaster status # test that puppet master was installed
 sudo service puppetmaster stop
 sudo puppet master --verbose --no-daemonize
@@ -26,14 +23,13 @@ sudo service puppetmaster start
 sudo puppet cert list --all # check for 'puppet' cert
 
 # Shift+Ctrl+T # new tab on host
-vagrant ssh puppetnode-01 # ssh into agent node
-sh /vagrant/bootstrap-node.sh # run bootstrap script
+vagrant ssh node01.example.com # ssh into agent node
 sudo service puppet status # test that agent was installed
 sudo puppet agent --test --waitforcert=60 # initiate certificate signing request (CSR)
 ```
-Back on the Puppet Master server (puppetmaster)
+Back on the Puppet Master server (puppet.example.com)
 ```
-sudo puppet cert list # should see 'node01' cert waiting for signature
+sudo puppet cert list # should see 'node01.example.com' cert waiting for signature
 sudo puppet cert sign --all # sign the agent node(s) cert(s)
 sudo puppet cert list --all # check for signed cert(s)
 ```

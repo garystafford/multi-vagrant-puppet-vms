@@ -25,15 +25,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           id:    port[':id']
       end
 
-      config.vm.hostname = node_values[':hostname']
+      config.vm.hostname = node_name
       config.vm.network :private_network, ip: node_values[':ip']
 
       config.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--memory", node_values[':memory']]
-        vb.customize ["modifyvm", :id, "--name", node_values[':name']]
+        vb.customize ["modifyvm", :id, "--name", node_name]
       end
 
-      #config.vm.provision :shell, :path => node_values[':bootstrap']
+      config.vm.provision :shell, :path => node_values[':bootstrap']
     end
   end
 end
