@@ -60,3 +60,4 @@ The use of the specific <machine> name is optional.
 * `facter`
 * `sudo tail -50 /var/log/syslog`
 * `sudo tail -50 /var/log/puppet/masterhttp.log`
+* `tail -50 ~/VirtualBox\ VMs/postblog/<machine>/Logs/VBox.log'

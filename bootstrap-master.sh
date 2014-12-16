@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # Run on VM to bootstrap Puppet Master server
-# http://blog.kloudless.com/2013/07/01/automating-development-environments-with-vagrant-and-puppet/
 
 if ps aux | grep "puppet master" | grep -v grep 2> /dev/null
 then
@@ -11,7 +10,7 @@ else
     wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb && \
     sudo dpkg -i puppetlabs-release-trusty.deb && \
     sudo apt-get update -yq && sudo apt-get upgrade -yq && \
-    sudo apt-get install -yq puppetmaster git
+    sudo apt-get install -yq puppetmaster
 
     # Configure /etc/hosts file
     echo "" | sudo tee --append /etc/hosts 2> /dev/null && \

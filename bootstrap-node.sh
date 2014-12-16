@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # Run on VM to bootstrap Puppet Agent nodes
-# http://blog.kloudless.com/2013/07/01/automating-development-environments-with-vagrant-and-puppet/
 
 if ps aux | grep "puppet agent" | grep -v grep 2> /dev/null
 then
