@@ -16,11 +16,9 @@ vagrant up # brings up all VMs
 vagrant ssh puppetmaster
 
 sh /vagrant/bootstrap-master.sh # run bootstrap script
-
-sh /vagrant/bootstrap-master.sh # run bootstrap script
 sudo service puppetmaster status # test that puppet master was installed
 sudo service puppetmaster stop
-sudo puppet master --verbose --no-daemonize
+sudo puppetmaster --verbose --no-daemonize
 # Ctrl+C to kill puppet master
 sudo service puppetmaster start
 sudo puppet cert list --all # check for 'puppet' cert
