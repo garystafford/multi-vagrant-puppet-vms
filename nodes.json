@@ -2,7 +2,7 @@
   "nodes": {
     "puppetmaster": {
       ":name": "Puppet Master",
-      ":ip": "192.168.32.5",
+      ":ip": "10.0.0.101",
       ":hostname": "puppet",
       "ports": [],
       ":memory": 1024,
@@ -10,16 +10,8 @@
     },
     "puppetnode-01": {
       ":name": "Puppet Node 01",
-      ":ip": "192.168.32.10",
+      ":ip": "10.0.0.102",
       ":hostname": "node01",
-      "ports": [],
-      ":memory": 1024,
-      ":bootstrap": "bootstrap-node.sh"
-    },
-    "puppetnode-02": {
-      ":name": "Puppet Node 02",
-      ":ip": "192.168.32.20",
-      ":hostname": "node02",
       "ports": [],
       ":memory": 1024,
       ":bootstrap": "bootstrap-node.sh"

@@ -9,7 +9,8 @@ nodes_config = (JSON.parse(File.read("nodes.json")))['nodes']
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box_check_update = true
 
   nodes_config.each do |node|
     node_name   = node[0] # name of node
@@ -33,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--name", node_values[':name']]
       end
 
-      #config.vm.provision :shell, :path => node_values[':bootstrap']
+      config.vm.provision :shell, :path => node_values[':bootstrap']
     end
   end
 end
