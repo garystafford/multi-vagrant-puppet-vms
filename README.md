@@ -62,3 +62,7 @@ The use of the specific <machine> name is optional.
 * `facter`
 * `sudo tail -50 /var/log/syslog`
 * `sudo tail -50 /var/log/puppet/masterhttp.log`
+
+#### For any ip range (for linux based)
+sudo mkdir -p /etc/vbox/
+echo "* 0.0.0.0/0 ::/0" | sudo tee -a /etc/vbox/networks.conf
